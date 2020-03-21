@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import ReceitaCard from './components/ReceitaCard'
-import Receitas from './screens/Receitas'
+import Navigator from './navigation/Navigator'
+
 function App() {
   
   return (
     <div className="App">
-      <Receitas></Receitas>
+      <Navigator/>
     </div>
   );
 }
