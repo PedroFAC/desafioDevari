@@ -1,53 +1,18 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import ReceitaCard from '../components/ReceitaCard'
-import {Grid} from '@material-ui/core'
-
+import {Grid,Button} from '@material-ui/core'
+import api from '../services/api'
 
 const Receitas = () => {
-    const receitas= [
-        {
-          tipo:'Pizza',
-          nome:'Calabresa',
-          descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-        },
-        {
-          tipo:'Sanduíche',
-          nome:'X-Salada',
-          descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-        },
-        {
-            tipo:'Sanduíche',
-            nome:'X-Salada',
-            descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-          },
-          {
-            tipo:'Sanduíche',
-            nome:'X-Salada',
-            descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-          },
-          {
-            tipo:'Sanduíche',
-            nome:'X-Salada',
-            descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-          },
-          {
-            tipo:'Sanduíche',
-            nome:'X-Salada',
-            descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-          },
-          {
-            tipo:'Sanduíche',
-            nome:'X-Salada',
-            descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-          },
-          {
-            tipo:'Sanduíche',
-            nome:'X-Salada',
-            descricao:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras maximus at augue a sodales. Nullam ut sollicitudin ipsum. Ut et aliquet elit. Sed vitae pellentesque dolor. Proin risus sem, semper laoreet vestibulum vitae, tincidunt at purus. Donec fermentum ipsum sagittis quam imperdiet, quis ultrices urna viverra...',
-          },
-
-      ]
-    return (
+      let receitas = []
+      async function getReceitas(){
+        const response = await api.get('/api/v1/recipe/')
+        console.log(response.data)
+      }
+        useEffect(()=>{
+          getReceitas()
+        },[])
+      return (
         <div>
         <Grid
         container 
@@ -55,12 +20,7 @@ const Receitas = () => {
   justify="center"
   alignItems="center"
         >
-      {
-        receitas.map(
-          value =>{
-          return <ReceitaCard  nome={value.nome} tipo = {value.tipo} descricao={value.descricao}/>
-          })
-      }
+          
       </Grid>
         </div>
     );
