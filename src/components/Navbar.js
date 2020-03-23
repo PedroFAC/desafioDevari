@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppBar,Toolbar,Typography, Button,IconButton, Menu,MenuItem} from '@material-ui/core'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {useState} from 'react'
 
 const Navbar = () => {
@@ -21,9 +21,9 @@ const Navbar = () => {
             <Typography edge="start" variant="h6" >
             App de Receitas
           </Typography>
-          <Link to={'/receitas'}> <Button color="inherit">Receitas</Button></Link>
-          <Link to={'/minhasReceitas'}> <Button color="inherit">Minhas Receitas</Button></Link>
-          <Link to={'/addReceita'}> <Button color="inherit">Adicionar Receitas</Button></Link>
+          <NavLink to={'/receitas'} exact activeStyle={linkStyle}> <Button color="inherit">Receitas</Button></NavLink>
+          <NavLink to={'/minhasReceitas'} exact activeStyle={linkStyle}> <Button color="inherit">Minhas Receitas</Button></NavLink>
+          <NavLink to={'/addReceita'} exact activeStyle={linkStyle}> <Button color="inherit">Adicionar Receitas</Button></NavLink>
             <IconButton
                color="inherit"
                onClick={handleClick}
@@ -36,7 +36,7 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
               >
-               <Link to={'/login'}><MenuItem onClick={handleClose}>Logout</MenuItem></Link>
+               <NavLink to={'/login'}><MenuItem onClick={handleClose}>Logout</MenuItem></NavLink>
               </Menu>
 
             </Toolbar>
@@ -46,5 +46,8 @@ const Navbar = () => {
         </div>
     );
 };
+const linkStyle = {
+    color:'white'
+}
 
 export default Navbar;
