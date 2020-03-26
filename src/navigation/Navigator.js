@@ -6,6 +6,7 @@ import Login from '../screens/Login'
 import AddReceita from '../screens/AddReceita'
 import MinhasReceitas from '../screens/MinhasReceitas'
 import ReceitaPage from  '../screens/ReceitaPage'
+import EditReceita from '../screens/EditReceita'
 
 const Navigator = () => {
     return (
@@ -18,7 +19,12 @@ const Navigator = () => {
         <Route path={"/addReceita"} component={AddReceita}/>
         <Route path={"/receitas"} component={Receitas}/>
         <Route path={"/minhasReceitas"} component={MinhasReceitas}/>
-        <Route path={"/receitaPage"} component={ReceitaPage}/>
+        </Switch>
+        <Switch>
+        <Route path={"/receitaPage/:id"} component={ReceitaPage}/>
+        </Switch>
+        <Switch>
+        <Route path={"/editReceita/:id"} component={EditReceita}/>
         </Switch>
       </BrowserRouter>
         </div>

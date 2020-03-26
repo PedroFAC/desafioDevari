@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card,CardActionArea,CardContent,Button,Typography, Grid } from '@material-ui/core'
-import ReceitaCard from '../components/ReceitaCard'
+import MyReceitaCard from '../components/MyReceitaCard'
 import {Link} from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import {connect} from 'react-redux'
@@ -16,7 +16,12 @@ const MinhasReceitas = (props) => {
       console.log(data)
       
   }
-    
+  const deleteReceitas = async id=>{
+    api.setHeaders({Authorization: 'Token '+props.token})
+    const response = await api.delete('/api/v1/recipe/'+id)
+    console.log(response.data)
+    getReceitas()
+  }
 
     return (
         <div>
@@ -28,7 +33,7 @@ const MinhasReceitas = (props) => {
         >
           {
             data.map(value=>{
-            return <ReceitaCard tipo={value.category.name} descricao={value.description} nome={value.title} image={value.category.image}/>
+            return <MyReceitaCard id={value.id} tipo={value.category.name} descricao={value.description} nome={value.title} image={value.category.image} delete={()=>deleteReceitas(value.id)}/>
             })
           }
           <Card >

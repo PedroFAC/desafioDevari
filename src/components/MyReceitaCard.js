@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     },
   })
 
-const ReceitaCard = (props) => {
+const MyReceitaCard = (props) => {
     const [tipo,setTipo] = useState(props.tipo)
     const [nome,setNome] = useState(props.nome)
     const [descricao, setDescricao] = useState(props.descricao)
@@ -36,9 +36,14 @@ const ReceitaCard = (props) => {
           <Link to={'/receitaPage/'+props.id}> 
           <Button size="small">Ver Receita</Button>
           </Link>
+          <Link to={'/editReceita/'+props.id}> 
+          <Button size="small">Editar Receita</Button>
+          </Link>
+          <Button onClick={props.delete} size="small">Deletar Receita</Button>
+        
         </CardActionArea>
       </Card>
     );
 };
 
-export default ReceitaCard;
+export default MyReceitaCard;

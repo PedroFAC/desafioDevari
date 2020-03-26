@@ -17,7 +17,6 @@ const Receitas = (props) => {
           console.log(data)
           
       }
-      useEffect(()=>getReceitas(),[])
       return (
         <div>
         <Grid
@@ -28,7 +27,7 @@ const Receitas = (props) => {
         >
           {
             data.map(value=>{
-            return <ReceitaCard tipo={value.category.name} descricao={value.description} nome={value.title} image={value.category.image}/>
+            return <ReceitaCard id={value.id} tipo={value.category.name} descricao={value.description} nome={value.title} image={value.category.image}/>
             })
           }
          <Button onClick={getReceitas}>map</Button>
