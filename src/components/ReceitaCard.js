@@ -1,12 +1,17 @@
 import React from 'react';
-import {Card,CardActionArea,CardContent,Button,Typography,makeStyles } from '@material-ui/core'
+import {Card,CardActionArea,CardContent,Button,Typography,makeStyles,CardMedia } from '@material-ui/core'
 import {useState,useEffect} from 'react'
-
+import {Link} from 'react-router-dom'
   
 const useStyles = makeStyles({
     root: {
-      maxWidth: 400,
-    }})
+      width: 400,
+      height:350
+    },
+    media: {
+      height: 140,
+    },
+  })
 
 const ReceitaCard = (props) => {
     const [tipo,setTipo] = useState(props.tipo)
@@ -16,14 +21,21 @@ const ReceitaCard = (props) => {
     return (
         <Card variant="outlined" className={classes.root} >
         <CardContent>
+          <CardMedia className={classes.media}
+          component='img'
+            src={props.image}
+          >
+            </CardMedia>
           <Typography>{tipo}</Typography>
-           <Typography variant ="h5" component="h2">{nome}</Typography> 
+           <Typography variant ="h5" component="p">{nome}</Typography> 
            <Typography >
                 {descricao}
             </Typography>
         </CardContent>
         <CardActionArea>
+          <Link to={'/receitaPage'}> 
           <Button size="small">Ver Receita</Button>
+          </Link>
         </CardActionArea>
       </Card>
     );
