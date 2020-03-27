@@ -41,9 +41,12 @@ const EditReceita = (props) => {
           setNome(response.data.title)
           setDescricao(response.data.description)
     }
-    useEffect(()=>getCategories(),[])
+    function getAll(){
+        getCategories();
+        getReceita();
+    }
     return (
-        <div>
+        <div onLoad={getAll()}>
             <Container>
                 
                 <h1>{id}</h1>
@@ -61,7 +64,6 @@ const EditReceita = (props) => {
                 <TextField value={nome} onChange={e=>setNome(e.target.value)} label="Nome da receita"></TextField><br/>
                 <TextareaAutosize value={descricao} onChange={e=>setDescricao(e.target.value)}></TextareaAutosize><br/>
                 <Button onClick={addReceita}>Adicionar Receita</Button>
-                <Button onClick={getReceita}>Get</Button>
             </Container>
         </div>
     );

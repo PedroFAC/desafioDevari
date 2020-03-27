@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppBar,Toolbar,Typography, Button,IconButton, Menu,MenuItem} from '@material-ui/core'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import {NavLink, Redirect} from 'react-router-dom'
+import {NavLink, Redirect,useHistory} from 'react-router-dom'
 import {useState} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -20,9 +20,9 @@ const Navbar = (props) => {
   };
   const logoutUser =()=>{
     props.logout()
-    setLogout(true)
+    history.push('/login')
 }
-
+const history = useHistory()
 
     return (
         <div>
@@ -34,14 +34,17 @@ const Navbar = (props) => {
           
           { props.logged &&
             <div>
-          <NavLink to={'/receitas'} exact activeStyle={linkStyle}> <Button color="inherit">Receitas</Button></NavLink>
-          <NavLink to={'/minhasReceitas'} exact activeStyle={linkStyle}> <Button color="inherit">Minhas Receitas</Button></NavLink>
-          <NavLink to={'/addReceita'} exact activeStyle={linkStyle}> <Button color="inherit">Adicionar Receitas</Button></NavLink>
+           <Button onClick={()=>history.push('/receitas')} color="inherit">Receitas</Button>
+           <Button onClick={()=>history.push('/minhasReceitas')} color="inherit">Minhas Receitas</Button>
+          <Button onClick={()=>history.push('/addReceita')}color="inherit">Adicionar Receitas</Button>
             <IconButton
                color="inherit"
                onClick={handleClick}
               >
                 <AccountCircle />
+                <Typography  >
+            {props.name}
+          </Typography>
               </IconButton>
               <Menu 
               keepMounted
@@ -51,14 +54,10 @@ const Navbar = (props) => {
               >
                <MenuItem onClick={logoutUser}>Logout</MenuItem>
               </Menu>
-              <Typography edge="end" variant="h8" >
-            {props.name}
-          </Typography>
+              
               </div>
             }
-            {logout &&
-                <Redirect to={'/login'}/>
-              }
+            
             </Toolbar>
 
             </AppBar>

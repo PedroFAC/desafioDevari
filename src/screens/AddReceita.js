@@ -32,9 +32,8 @@ const AddReceita = (props) => {
         setDescricao('')
         }
     }
-    useEffect(()=>getCategories(),[])
     return (
-        <div>
+        <div onLoad={getCategories()}>
             <Container>
                 <Select
                 value={tipo}

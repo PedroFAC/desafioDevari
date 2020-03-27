@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card,CardActionArea,CardContent,Button,Typography,makeStyles,CardMedia } from '@material-ui/core'
 import {useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
   
 const useStyles = makeStyles({
     root: {
@@ -16,8 +16,8 @@ const useStyles = makeStyles({
 const MyReceitaCard = (props) => {
     const [tipo,setTipo] = useState(props.tipo)
     const [nome,setNome] = useState(props.nome)
-    const [descricao, setDescricao] = useState(props.descricao)
     const classes = useStyles()
+    const history = useHistory()
     return (
         <Card variant="outlined" className={classes.root} >
         <CardContent>
@@ -29,16 +29,15 @@ const MyReceitaCard = (props) => {
           <Typography>{tipo}</Typography>
            <Typography variant ="h5" component="p">{nome}</Typography> 
            <Typography >
-                {descricao}
+               Criado por: {props.usuario}
             </Typography>
         </CardContent>
         <CardActionArea>
-          <Link to={'/receitaPage/'+props.id}> 
-          <Button size="small">Ver Receita</Button>
-          </Link>
-          <Link to={'/editReceita/'+props.id}> 
-          <Button size="small">Editar Receita</Button>
-          </Link>
+          <Button onClick={()=>history.push('/receitaPage/'+props.id)} size="small">Ver Receita</Button>
+
+         
+          <Button onClick={()=>history.push('/editReceita/'+props.id)} size="small">Editar Receita</Button>
+
           <Button onClick={props.delete} size="small">Deletar Receita</Button>
         
         </CardActionArea>

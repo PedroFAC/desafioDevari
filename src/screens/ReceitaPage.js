@@ -1,5 +1,5 @@
 import React , {useState,useEffect}from 'react';
-import {Paper,makeStyles,Grid,Button,Typography} from '@material-ui/core'
+import {Paper,makeStyles,Container,Button,Typography} from '@material-ui/core'
 import {useParams} from 'react-router-dom'
 import api from '../services/api'
 import {connect} from 'react-redux'
@@ -7,8 +7,8 @@ import {connect} from 'react-redux'
 
 const useStyles = makeStyles({
     root: {
-      width: '60%',
-      height:'60%'
+      width: '100%',
+      alignContent:'center'
     },
 })
 
@@ -30,10 +30,9 @@ const ReceitaPage = (props) => {
           setData(data)
           console.log(data)
     }
-
     return (
-        <div>
-            <Grid>
+        <div onLoad={getReceita()}>
+            <Container>
                 <Button onClick={getReceita}>Get</Button>
             <Paper className={classes.root} elevation ={2}>
                 <h1>{data.title}</h1>
@@ -42,7 +41,7 @@ const ReceitaPage = (props) => {
                     {data.description}
                 </Typography>
             </Paper>
-            </Grid>
+            </Container>
         </div>
     );
 };

@@ -19,11 +19,10 @@ const Navigator = () => {
         <Route path={"/addReceita"} component={AddReceita}/>
         <Route path={"/receitas"} component={Receitas}/>
         <Route path={"/minhasReceitas"} component={MinhasReceitas}/>
+        
         </Switch>
         <Switch>
         <Route path={"/receitaPage/:id"} component={ReceitaPage}/>
-        </Switch>
-        <Switch>
         <Route path={"/editReceita/:id"} component={EditReceita}/>
         </Switch>
       </BrowserRouter>

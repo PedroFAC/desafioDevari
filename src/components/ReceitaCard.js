@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card,CardActionArea,CardContent,Button,Typography,makeStyles,CardMedia } from '@material-ui/core'
 import {useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
   
 const useStyles = makeStyles({
     root: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 const ReceitaCard = (props) => {
     const [tipo,setTipo] = useState(props.tipo)
     const [nome,setNome] = useState(props.nome)
-    const [descricao, setDescricao] = useState(props.descricao)
+    const history=useHistory()
     const classes = useStyles()
     return (
         <Card variant="outlined" className={classes.root} >
@@ -29,13 +29,11 @@ const ReceitaCard = (props) => {
           <Typography>{tipo}</Typography>
            <Typography variant ="h5" component="p">{nome}</Typography> 
            <Typography >
-                {descricao}
+           Criado por: {props.usuario}
             </Typography>
         </CardContent>
         <CardActionArea>
-          <Link to={'/receitaPage/'+props.id}> 
-          <Button size="small">Ver Receita</Button>
-          </Link>
+          <Button onClick={()=>history.push('/receitaPage/'+props.id)} size="small">Ver Receita</Button>
         </CardActionArea>
       </Card>
     );

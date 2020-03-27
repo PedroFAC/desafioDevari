@@ -17,8 +17,9 @@ const Receitas = (props) => {
           console.log(data)
           
       }
+      
       return (
-        <div>
+        <div onLoad={getReceitas()}>
         <Grid
         container 
         direction="row"
@@ -27,10 +28,9 @@ const Receitas = (props) => {
         >
           {
             data.map(value=>{
-            return <ReceitaCard id={value.id} tipo={value.category.name} descricao={value.description} nome={value.title} image={value.category.image}/>
+            return <ReceitaCard id={value.id} tipo={value.category.name} usuario={value.user.name} nome={value.title} image={value.category.image}/>
             })
           }
-         <Button onClick={getReceitas}>map</Button>
       </Grid>
         </div>
     );
