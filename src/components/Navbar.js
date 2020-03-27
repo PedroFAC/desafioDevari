@@ -70,9 +70,9 @@ const linkStyle = {
 }
 
 const mapStateToProps = state=>({
-  logged: state.login.logged,
-  username: state.login.username,
-  name: state.login.name
+  logged: state.logged,
+  username: state.username,
+  name: state.name
 })
 const mapDispatchToProps= dispatch=>
 bindActionCreators(loginActions,dispatch)

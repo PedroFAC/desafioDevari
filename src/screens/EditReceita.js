@@ -1,16 +1,39 @@
 import React from 'react';
-import {TextField, Button, Container,TextareaAutosize, Select,MenuItem} from '@material-ui/core'
-import{useState,useEffect} from 'react'
+import {TextField, Button, Container,TextareaAutosize, Select,MenuItem,makeStyles, Paper, InputLabel,FormControl} from '@material-ui/core'
+import{useState} from 'react'
 import {connect} from 'react-redux'
-import {useParams} from 'react-router-dom'
+import {useParams, useHistory} from 'react-router-dom'
 import api from '../services/api'
+import Loading from '../components/Loading'
+const useStyles = makeStyles({
+    root:{
+        width:'80%',
+        alignItems: 'center'
+    },
+    field:{
+        width:'60%',
+        marginTop: 20,
+    },
+    
+    button:{
+        marginTop:20,
+        marginBottom:40
+    },
+    select:{
+        width:'20%',
+        marginTop: 20,
+
+    }
+})
 
 const EditReceita = (props) => {
+    const history = useHistory()
     let {id} = useParams()
     const [tipo,setTipo] = useState('')
     let [categorias, setCategorias] = useState([])
     const [nome,setNome] = useState('')
     const [descricao, setDescricao] = useState('')
+    const [loading,setLoading] = useState(true)
     const handleChange = event => {
         setTipo(event.target.value);
       };
@@ -20,7 +43,7 @@ const EditReceita = (props) => {
           categorias= response.data
           setCategorias(categorias)
           console.log(props.id)
-
+          setLoading(false)
           
       }
       const addReceita = async()=>{
@@ -31,6 +54,7 @@ const EditReceita = (props) => {
         setTipo('')
         setNome('')
         setDescricao('')
+        history.push('/minhasReceitas')
         }
     }
     const getReceita = async()=>{
@@ -42,14 +66,20 @@ const EditReceita = (props) => {
           setDescricao(response.data.description)
     }
     function getAll(){
+        if(loading){
         getCategories();
         getReceita();
+        }
     }
+    const classes = useStyles()
     return (
         <div onLoad={getAll()}>
             <Container>
-                
-                <h1>{id}</h1>
+                <Loading active={loading}/>
+                {!loading &&
+                <Paper>
+                <FormControl className={classes.select}>
+                <InputLabel id="label" >Categoria</InputLabel>
                 <Select
                 value={tipo}
                 onChange={handleChange}
@@ -60,22 +90,26 @@ const EditReceita = (props) => {
                         )
                     }
                     
-                </Select><br/>
-                <TextField value={nome} onChange={e=>setNome(e.target.value)} label="Nome da receita"></TextField><br/>
-                <TextareaAutosize value={descricao} onChange={e=>setDescricao(e.target.value)}></TextareaAutosize><br/>
-                <Button onClick={addReceita}>Adicionar Receita</Button>
+                </Select>
+                </FormControl>
+                <br/>
+                <TextField className={classes.field} value={nome} onChange={e=>setNome(e.target.value)} label="Nome da receita"></TextField><br/>
+                <TextareaAutosize placeholder='Descrição' className={classes.field} value={descricao} onChange={e=>setDescricao(e.target.value)}></TextareaAutosize><br/>
+                <Button onClick={addReceita} color="primary">Atualizar Receita</Button>
+                </Paper>
+                }
             </Container>
         </div>
     );
 };
 const mapStateToProps = state=>({
-    logged: state.login.logged,
-    username: state.login.username,
-    name: state.login.name,
-    image:state.login.image,
-    email:state.login.email,
-    token:state.login.token,
-    id: state.login.id
+    logged: state.logged,
+    username: state.username,
+    name: state.name,
+    image:state.image,
+    email:state.email,
+    token:state.token,
+    id: state.id
 })
 
 export default connect(mapStateToProps)(EditReceita);

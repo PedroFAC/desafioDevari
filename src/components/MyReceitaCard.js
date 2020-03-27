@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card,CardActionArea,CardContent,Button,Typography,makeStyles,CardMedia } from '@material-ui/core'
-import {useState,useEffect} from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import {useState} from 'react'
+import {useHistory} from 'react-router-dom'
   
 const useStyles = makeStyles({
     root: {
